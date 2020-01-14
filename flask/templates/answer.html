@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- include jQuery, so we have access to the $.post function -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <script src="../static/functions.js"></script>
+  <script type='text/javascript' src='https://10ay.online.tableau.com/javascripts/api/viz_v1.js'></script>
+
+  <title>Airbnb Pricing</title>
+  <link rel='icon' href='https://cdn.shopify.com/s/files/1/2263/3863/t/3/assets/gem20170926170925_reerth-rewards-tier-icons-3.png?3908571769976669947' type='image/png'/ >
+</head>
+
+<body>
+  <main role="main" class="container">
+    <div class="page-bg">
+    </div>
+    <ul>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a class="active" href="/predict">Predictor</a></li>
+
+    </ul>
+	  <div class="row">
+	    <div class="col-md-8">
+        <form class='ans'>
+          <a href="/predict" class="previous">&laquo; Go back</a>
+          <h4>
+              <br>  Suggested price:
+          </h4>
+          <h3>
+              ${{ total }}/night <span>(for {{ date }})</span>
+          </h3>
+          <table>
+            <tr>
+              <th>Price Breakdown</th>
+            </tr>
+            <tr>
+              <div class = 'tab_head'>
+              <td>Base Price:</td>
+              <td>$ {{ prediction }}</td>
+              </div>
+            </tr>
+            <tr>
+              <div class = 'tab_head'>
+              <td>Day of Week:</td>
+              <td>$ {{ weekly }}</td>
+              </div>
+            </tr>
+            <tr>
+              <div class = 'tab_head'>
+              <td>Seasonal:</td>
+              <td>$ {{ seasonal }}</td>
+              </div>
+            </tr>
+            <tr>
+              <div class = 'tab_head'>
+              <td>Holiday:</td>
+              <td>$ {{ holiday }}</td>
+              </div>
+            </tr>
+
+          </table>
+          <br>
+          <br>
+          <h5>
+            Check out some similar listings that get a lot of bookings
+          </h5>
+          <br>
+          <div class="card-deck">
+            <div class="card w-50">
+              <img src={{ sim_picture_url[0] }} class="card-img-top" alt="Airbnb">
+              <div class="card-body">
+                <h6 class="card-title">{{ sim_name[0] }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ sim_prop[0] }} - {{ sim_neigh[0] }}</h6>
+                <p class="card-text">{{ sim_room[0] }}<br>Bedrooms: {{ sim_bedrooms[0] }} <br> Beds: {{ sim_beds[0] }} <br> Bathrooms: {{ sim_baths[0] }}<br> Base Price: ${{ sim_price[0] }}</p>
+                <a href={{ sim_listing_url[0] }} class="btn btn-secondary">Check it out</a>
+
+              </div>
+            </div>
+            <div class="card w-50">
+              <img src={{ sim_picture_url[1] }} class="card-img-top" alt="Airbnb">
+              <div class="card-body">
+                <h6 class="card-title">{{ sim_name[1] }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ sim_prop[1] }} - {{ sim_neigh[1] }}</h6>
+                <p class="card-text">{{ sim_room[1] }}<br>Bedrooms: {{ sim_bedrooms[1] }} <br> Beds: {{ sim_beds[1] }} <br> Bathrooms: {{ sim_baths[1] }}<br> Base Price: ${{ sim_price[1] }}</p>
+                <a href={{ sim_listing_url[1] }} class="btn btn-secondary">Check it out</a>
+
+              </div>
+            </div>
+            <div class="card w-50">
+              <img src={{ sim_picture_url[2] }} class="card-img-top" alt="Airbnb">
+              <div class="card-body">
+                <h6 class="card-title">{{ sim_name[2] }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ sim_prop[2] }} - {{ sim_neigh[2] }}</h6>
+                <p class="card-text">{{ sim_room[2] }}<br>Bedrooms: {{ sim_bedrooms[2] }} <br> Beds: {{ sim_beds[2] }} <br> Bathrooms: {{ sim_baths[2] }}<br> Base Price: ${{ sim_price[2] }}</p>
+                <a href={{ sim_listing_url[2] }} class="btn btn-secondary">Check it out</a>
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class='card-deck'>
+            <div class="card w-50">
+              <img src={{ sim_picture_url[3] }} class="card-img-top" alt="Airbnb">
+              <div class="card-body">
+                <h6 class="card-title">{{ sim_name[3] }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ sim_prop[3] }} - {{ sim_neigh[3] }}</h6>
+                <p class="card-text">{{ sim_room[3] }}<br>Bedrooms: {{ sim_bedrooms[3] }} <br> Beds: {{ sim_beds[3] }} <br> Bathrooms: {{ sim_baths[3] }}<br> Base Price: ${{ sim_price[3] }}</p>
+                <a href={{ sim_listing_url[3] }} class="btn btn-secondary">Check it out</a>
+
+              </div>
+            </div>
+            <div class="card w-50">
+              <img src={{ sim_picture_url[4] }} class="card-img-top" alt="Airbnb">
+              <div class="card-body">
+                <h6 class="card-title">{{ sim_name[4] }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ sim_prop[4] }} - {{ sim_neigh[4] }}</h6>
+                <p class="card-text">{{ sim_room[4] }}<br>Bedrooms: {{ sim_bedrooms[4] }} <br> Beds: {{ sim_beds[4] }} <br> Bathrooms: {{ sim_baths[4] }}<br> Base Price: ${{ sim_price[4] }}</p>
+                <a href={{ sim_listing_url[4] }} class="btn btn-secondary">Check it out</a>
+
+              </div>
+            </div>
+          </div>
+        </form>
+
+	    </div>
+	  </div>
+	</main>
+
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

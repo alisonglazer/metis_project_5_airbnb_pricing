@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+  <!-- Bootstrap Date-Picker Plugin -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+
+    <!-- include jQuery, so we have access to the $.post function -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <script src="../static/functions.js"></script>
+  <title>Airbnb Pricing</title>
+  <link rel='icon' href='https://cdn.shopify.com/s/files/1/2263/3863/t/3/assets/gem20170926170925_reerth-rewards-tier-icons-3.png?3908571769976669947' type='image/png'/ >
+</head>
+<body>
+  <!-- <img src="/static/images/decision_tree.png" alt="My charts" > -->
+  <main role="main" class="container">
+    <div class="page-bg">
+    </div>
+    <ul>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a class="active" href="/predict">Predictor</a></li>
+    </ul>
+        <form action="/answer">
+
+          <h3>Enter listing information.</h3>
+          <table>
+            <tr>
+              {% for ix in range(2) %}
+              <td>
+                <label>{{ feature_display_names[ix] }}</label>
+                <input type="number" name="{{ feature_names[ix] }}" class="form-control-form-control-sm" required>
+              </td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for ix in range(2,4) %}
+              <td>
+                <label>{{ feature_display_names[ix] }}</label>
+                <input type="number" name="{{ feature_names[ix] }}" class="form-control-form-control-sm" required>
+              </td>
+              {% endfor %}
+            </tr>
+            <tr>
+              {% for ix in range(4,6) %}
+              <td>
+                <label>{{ feature_display_names[ix] }}</label>
+                <input type="number" name="{{ feature_names[ix] }}" class="form-control-form-control-sm" required>
+              </td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <td>
+              </td>
+              <td>
+                <i>(Rating out of 100)</i>
+              </td>
+            </tr>
+            <tr>
+              {% for ix in range(6,7) %}
+              <td>
+                <label>{{ feature_display_names[ix] }}</label>
+                <input type="number" name="{{ feature_names[ix] }}" class="form-control-form-control-sm" required>
+              </td>
+              {% endfor %}
+              <td>
+                <label>Bedrooms</label>
+                <input type="number" name="bedrooms" class="form-control-form-control-sm"required>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label>Beds</label>
+                <input type="number" name="beds" class="form-control-form-control-sm"  required>
+              </td>
+            </td>
+          </table>
+          <!-- <div class="form-row">
+            {% for ix in range(2) %}
+            <div class="col">
+              <label>{{ feature_display_names[ix] }}</label>
+              <input type="text" name="{{ feature_names[ix] }}" class="form-control-form-control-sm" required>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="form-row">
+            {% for ix in range(2,4) %}
+            <div class="col">
+              <label>{{ feature_display_names[ix] }}</label>
+              <input type="text" name="{{ feature_names[ix] }}" class="form-control-form-control-sm"required>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="form-row">
+            {% for ix in range(4,6) %}
+            <div class="col">
+              <label>{{ feature_display_names[ix] }}</label>
+              <input type="text" name="{{ feature_names[ix] }}" class="form-control-form-control-sm"  required>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="form-row">
+            {% for ix in range(6,7) %}
+            <div class="col">
+              <label>{{ feature_display_names[ix] }}</label>
+              <input type="text" name="{{ feature_names[ix] }}" class="form-control-form-control-sm"  required>
+            </div>
+            {% endfor %}
+            <div class="col">
+              <label>Bedrooms</label>
+              <input type="text" name="bedrooms" class="form-control-form-control-sm"required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class='col'>
+              <label>Beds</label>
+              <input type="text" name="beds" class="form-control-form-control-sm"  required>
+            </div> -->
+            <div class='col'>
+
+            </div>
+
+          </div>
+          <br>
+
+          <div class='row'>
+            <div class='col-6'>
+              <div class="select-style">
+                <select name="neigh"/>
+                  <option value="Other">Select Neighbourhood</option>
+                {% for ix in range(13,27) %}
+                    {% if feature_names[ix] == neigh %}
+                        <option value="{{feature_names[ix]}}" selected>{{ feature_display_names[ix] }}</option>
+                    {% endif %}
+                    <option value="{{feature_names[ix]}}">{{ feature_display_names[ix] }}</option>
+                    <!-- <input type="text" name="{{ f }}" value="{{x_input[loop.index0]}}"> -->
+                {% endfor %}
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class='col-6'>
+              <div class="select-style">
+                <select name="room"/>
+                  <option value="Other">Select Room Type</option>
+                {% for ix in range(27,30) %}
+                    {% if feature_names[ix] == room %}
+                        <option value="{{feature_names[ix]}}" selected>{{ feature_display_names[ix] }}</option>
+                    {% endif %}
+                    <option value="{{feature_names[ix]}}">{{ feature_display_names[ix] }}</option>
+                    <!-- <input type="text" name="{{ f }}" value="{{x_input[loop.index0]}}"> -->
+                {% endfor %}
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-6'>
+              <div class="select-style">
+                <select name="prop"/>
+                  <option value="Other">Select Property Type</option>
+                {% for ix in range(30,36) %}
+                    {% if feature_names[ix] == prop %}
+                        <option value="{{feature_names[ix]}}" selected>{{ feature_display_names[ix] }}</option>
+                    {% endif %}
+                    <option value="{{feature_names[ix]}}">{{ feature_display_names[ix] }}</option>
+                {% endfor %}
+                  <option value="Other">House</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+            <br>
+            <div class="form-group"> <!-- Date input -->
+              <label class="control-label" for="date">Date</label>
+              <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="date" required/>
+            </div>
+            <span> </span>
+
+              <input value = "Submit" type="submit" class="btn btn-primary" method="get"></input>
+            </form>
+
+
+	</main>
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
