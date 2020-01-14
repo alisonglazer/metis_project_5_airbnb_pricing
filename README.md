@@ -33,6 +33,6 @@ To allow hosts, particularly new ones, to compare their listings to similar ones
 
 [`p05_Clustering.ipynb`](p05_Clustering.ipynb) is unfinished, but uses clustering algorithms to try and create meaningful, distinct groups of Airbnb listings to improve the quality of the price suggestions
 
-[Web App](web_app) files used to build the browser-based predictor tool hosted on Heroku [here](http://airbnb-pricing.herokuapp.com/)
+[`Web App`](web_app) files used to build the browser-based predictor tool hosted on Heroku [here](http://airbnb-pricing.herokuapp.com/)
 
 Slides can be found [here](https://www.slideshare.net/AlisonGlazer/smarter-pricing-for-airbnb)
